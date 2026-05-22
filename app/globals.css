@@ -20,13 +20,13 @@
 @layer components {
   .prose-bce {
     @apply prose prose-invert max-w-none
-      prose-headings:font-serif prose-headings:font-light prose-headings:tracking-wide prose-headings:text-bce-cream
+      prose-headings:font-serif prose-headings:font-normal prose-headings:tracking-wide prose-headings:text-bce-cream
       prose-h2:text-3xl prose-h2:mt-14 prose-h2:mb-5
       prose-h3:text-2xl prose-h3:mt-10 prose-h3:mb-4
       prose-h4:text-lg prose-h4:mt-8 prose-h4:mb-3
-      prose-p:text-bce-cream/80 prose-p:leading-[1.85] prose-p:text-[1.0625rem]
+      prose-p:text-bce-cream/80 prose-p:leading-[1.85] prose-p:text-[1.0625rem] prose-p:font-sans
       prose-a:text-bce-gold prose-a:no-underline hover:prose-a:underline prose-a:font-normal
-      prose-strong:text-bce-cream prose-strong:font-medium
+      prose-strong:text-bce-cream prose-strong:font-semibold
       prose-blockquote:border-l-bce-gold prose-blockquote:text-bce-cream/70 prose-blockquote:not-italic
       prose-ul:text-bce-cream/80 prose-ol:text-bce-cream/80
       prose-li:marker:text-bce-gold

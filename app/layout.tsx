@@ -1,21 +1,22 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import { Cormorant_Garamond } from 'next/font/google'
+import { Raleway } from 'next/font/google'
+import { Playfair_Display } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import WhatsAppButton from '@/components/WhatsAppButton'
 import { generateLocalBusinessSchema } from '@/lib/schema'
 
-const inter = Inter({
+const raleway = Raleway({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-raleway',
   display: 'swap',
 })
 
-const cormorant = Cormorant_Garamond({
-  weight: ['300', '400', '500', '600', '700'],
+const playfair = Playfair_Display({
+  weight: ['400', '500', '600', '700'],
   subsets: ['latin'],
-  variable: '--font-cormorant',
+  variable: '--font-playfair',
   display: 'swap',
 })
 
@@ -71,7 +72,7 @@ export default function RootLayout({
   const localBusinessSchema = generateLocalBusinessSchema()
 
   return (
-    <html lang="en" className={`${inter.variable} ${cormorant.variable}`}>
+    <html lang="en" className={`${raleway.variable} ${playfair.variable}`}>
       <body className="bg-bce-black text-bce-cream font-sans antialiased min-h-screen">
         <script
           type="application/ld+json"
@@ -80,6 +81,7 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
         <Footer />
+        <WhatsAppButton />
       </body>
     </html>
   )

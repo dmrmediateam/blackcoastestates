@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const navLinks = [
   { label: 'Co-Ownership', href: 'https://blackcoastestates.com/co-ownership' },
@@ -18,15 +19,18 @@ export default function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-bce-black/95 backdrop-blur-md border-b border-bce-border">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Brand */}
-        <Link href="/" className="flex items-center gap-4 shrink-0 group">
-          <div className="flex flex-col items-start leading-none">
-            <span className="font-serif text-base tracking-[0.25em] uppercase text-bce-cream group-hover:text-white transition-colors">
-              Black Coast Estates
-            </span>
-            <span className="text-[0.55rem] tracking-[0.45em] uppercase text-bce-gold font-sans mt-0.5">
-              Journal
-            </span>
-          </div>
+        <Link href="/" className="flex items-center gap-3 shrink-0 group">
+          <Image
+            src="/logo.svg"
+            alt="Black Coast Estates"
+            width={148}
+            height={37}
+            priority
+            className="h-8 w-auto opacity-90 group-hover:opacity-100 transition-opacity"
+          />
+          <span className="hidden sm:block text-[0.5rem] tracking-[0.45em] uppercase text-bce-gold font-sans border-l border-bce-border pl-3 pt-0.5">
+            Journal
+          </span>
         </Link>
 
         {/* Desktop nav */}

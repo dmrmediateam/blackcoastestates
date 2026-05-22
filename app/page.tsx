@@ -28,7 +28,6 @@ export default function HomePage({ searchParams }: PageProps) {
     : allPosts
 
   const [featured, ...rest] = filtered
-
   const schemas = [generateOrganizationSchema(), generateBlogSchema()]
 
   return (
@@ -38,99 +37,112 @@ export default function HomePage({ searchParams }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas) }}
       />
 
-      {/* Hero */}
-      <section className="pt-40 pb-16 border-b border-bce-border">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10">
-            <div className="max-w-2xl">
-              <span className="text-[0.65rem] tracking-[0.35em] uppercase text-bce-gold mb-5 block">
-                Journal
-              </span>
-              <h1 className="font-serif text-6xl lg:text-8xl font-light text-bce-cream tracking-wide leading-none mb-6">
-                Insights<br />&amp; Stories
-              </h1>
-              <p className="text-bce-muted leading-relaxed text-lg max-w-md mt-6">
-                Expert guides on buying property in Costa Rica, co-ownership, investment
-                returns, and life in Playa Negra.
-              </p>
-            </div>
-            {/* Quick-nav stats */}
-            <div className="flex gap-10 lg:gap-14 shrink-0 pb-1">
-              <div>
-                <p className="font-serif text-4xl text-bce-gold font-light">{allPosts.length}</p>
-                <p className="text-xs text-bce-muted mt-1 tracking-widest uppercase">Articles</p>
-              </div>
-              <div>
-                <p className="font-serif text-4xl text-bce-gold font-light">{categories.length}</p>
-                <p className="text-xs text-bce-muted mt-1 tracking-widest uppercase">Topics</p>
-              </div>
+      {/* ── HERO ── */}
+      {!activeCategory && (
+        <section className="relative min-h-[90vh] flex flex-col justify-end overflow-hidden">
+          {/* Background video */}
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover"
+          >
+            <source src="/hero.mp4" type="video/mp4" />
+          </video>
+          {/* Overlays */}
+          <div className="absolute inset-0 bg-gradient-to-t from-bce-black via-bce-black/45 to-bce-black/25" aria-hidden="true" />
+          <div className="absolute inset-0 bg-gradient-to-r from-bce-black/50 via-transparent to-transparent" aria-hidden="true" />
+
+          {/* Hero content */}
+          <div className="relative max-w-7xl mx-auto px-6 w-full pb-20 lg:pb-28 pt-40">
+            <p className="text-[0.65rem] tracking-[0.5em] uppercase text-bce-gold mb-8 font-sans">
+              Playa Negra · Guanacaste · Costa Rica
+            </p>
+            <h1 className="font-serif text-[5rem] sm:text-[7rem] lg:text-[10rem] italic font-normal text-bce-cream leading-[0.88] tracking-tight mb-10 max-w-4xl">
+              The<br />Journal
+            </h1>
+            <p className="text-bce-cream/60 text-lg max-w-md leading-relaxed mb-12 font-sans">
+              Insights on luxury real estate, co-ownership, and life in Playa Negra —
+              written for buyers who want real information.
+            </p>
+            <div className="flex flex-wrap items-center gap-4">
+              <a
+                href="#articles"
+                className="inline-flex items-center gap-2 text-sm font-sans font-medium tracking-widest uppercase text-bce-black bg-bce-gold px-8 py-4 hover:bg-bce-gold-light transition-colors"
+              >
+                Browse Articles
+              </a>
+              <a
+                href="https://blackcoastestates.com"
+                className="inline-flex items-center gap-2 text-sm font-sans font-medium tracking-wide text-bce-cream/80 border border-bce-cream/25 hover:border-bce-cream/60 hover:text-bce-cream px-8 py-4 transition-colors"
+              >
+                View Properties →
+              </a>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Topics hub */}
-      {!activeCategory && (
-        <section className="py-12 border-b border-bce-border">
-          <div className="max-w-7xl mx-auto px-6">
-            <p className="text-[0.65rem] tracking-[0.35em] uppercase text-bce-muted mb-7">
-              Browse by Topic
-            </p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-              {categories.map((cat) => {
-                const slug = cat.toLowerCase().replace(/\s+/g, '-')
-                const count = allPosts.filter((p) => p.category === cat).length
-                const icons: Record<string, string> = {
-                  'Co-Ownership': '1/2',
-                  'Location': '📍',
-                  'Market': '📊',
-                  'Investment': '💰',
-                  'Buying Guide': '📋',
-                }
-                return (
-                  <a
-                    key={cat}
-                    href={`/category/${slug}`}
-                    className="group border border-bce-border hover:border-bce-gold/50 bg-bce-surface hover:bg-bce-black transition-all duration-200 p-5 flex flex-col gap-3"
-                  >
-                    <span className="text-xs text-bce-muted group-hover:text-bce-gold transition-colors tracking-[0.2em] uppercase">
-                      {cat}
-                    </span>
-                    <span className="font-serif text-2xl text-bce-cream/40 group-hover:text-bce-gold/50 transition-colors font-light">
-                      {count}
-                    </span>
-                    <span className="text-[0.65rem] text-bce-muted/60 group-hover:text-bce-muted transition-colors">
-                      {count === 1 ? 'article' : 'articles'} →
-                    </span>
-                  </a>
-                )
-              })}
-            </div>
+          {/* Scroll line */}
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30" aria-hidden="true">
+            <div className="w-px h-14 bg-gradient-to-b from-transparent to-bce-cream" />
           </div>
         </section>
       )}
 
-      {/* Filter bar */}
-      <section className="py-7 border-b border-bce-border sticky top-16 z-40 bg-bce-black/95 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-6">
-          <CategoryFilter categories={categories} activeCategory={activeCategory} />
-        </div>
-      </section>
-
-      {/* Featured post */}
-      {featured && (
-        <section className="pt-12 pb-6">
+      {/* ── CATEGORY HEADER (when filtering) ── */}
+      {activeCategory && (
+        <section className="pt-40 pb-14 border-b border-bce-border">
           <div className="max-w-7xl mx-auto px-6">
+            <span className="text-[0.65rem] tracking-[0.5em] uppercase text-bce-gold mb-5 block font-sans">
+              Topic
+            </span>
+            <h1 className="font-serif text-6xl lg:text-8xl italic font-normal text-bce-cream leading-none mb-4">
+              {activeCategory}
+            </h1>
+            <p className="text-bce-muted mt-4 font-sans">
+              {filtered.length} {filtered.length === 1 ? 'article' : 'articles'}
+            </p>
+          </div>
+        </section>
+      )}
+
+      {/* ── STICKY FILTER BAR ── */}
+      <div id="articles">
+        <section className="py-5 border-b border-bce-border sticky top-16 z-40 bg-bce-black/98 backdrop-blur-md">
+          <div className="max-w-7xl mx-auto px-6 flex items-center justify-between gap-4">
+            <CategoryFilter categories={categories} activeCategory={activeCategory} />
+            <span className="text-[0.65rem] tracking-[0.2em] text-bce-muted shrink-0 hidden sm:block uppercase font-sans">
+              {filtered.length} {filtered.length === 1 ? 'article' : 'articles'}
+            </span>
+          </div>
+        </section>
+      </div>
+
+      {/* ── FEATURED POST ── */}
+      {featured && (
+        <section className="pt-16 pb-6">
+          <div className="max-w-7xl mx-auto px-6">
+            <p className="text-[0.6rem] tracking-[0.4em] uppercase text-bce-muted mb-6 font-sans">
+              {activeCategory ? 'Top Story' : 'Latest'}
+            </p>
             <BlogCard post={featured} featured />
           </div>
         </section>
       )}
 
-      {/* Post grid */}
+      {/* ── POST GRID ── */}
       {rest.length > 0 && (
-        <section className="py-6 pb-12">
+        <section className="pt-6 pb-20">
           <div className="max-w-7xl mx-auto px-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {/* Divider with label */}
+            <div className="flex items-center gap-6 mb-10 pt-4 border-t border-bce-border">
+              <span className="text-[0.6rem] tracking-[0.4em] uppercase text-bce-muted font-sans shrink-0">
+                More Articles
+              </span>
+              <div className="flex-1 h-px bg-bce-border" />
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-2">
               {rest.map((post) => (
                 <BlogCard key={post.slug} post={post} />
               ))}
@@ -139,13 +151,13 @@ export default function HomePage({ searchParams }: PageProps) {
         </section>
       )}
 
-      {/* Empty state */}
+      {/* ── EMPTY STATE ── */}
       {filtered.length === 0 && (
         <div className="max-w-7xl mx-auto px-6 py-32 text-center">
-          <p className="font-serif text-2xl font-light text-bce-muted">
+          <p className="font-serif text-3xl italic text-bce-muted">
             No posts in this category yet.
           </p>
-          <a href="/" className="mt-6 inline-block text-sm text-bce-gold hover:underline">
+          <a href="/" className="mt-8 inline-block text-sm text-bce-gold hover:underline font-sans">
             View all posts →
           </a>
         </div>
@@ -155,3 +167,4 @@ export default function HomePage({ searchParams }: PageProps) {
     </>
   )
 }
+

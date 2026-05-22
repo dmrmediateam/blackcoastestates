@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 const footerLinks = [
   { label: 'Co-Ownership', href: 'https://blackcoastestates.com/co-ownership' },
@@ -18,9 +19,15 @@ export default function Footer() {
           <div>
             <Link
               href="https://blackcoastestates.com"
-              className="font-serif text-2xl tracking-[0.15em] uppercase text-bce-cream block mb-4 hover:text-bce-gold transition-colors"
+              className="inline-block mb-5 opacity-80 hover:opacity-100 transition-opacity"
             >
-              Black Coast Estates
+              <Image
+                src="/logo.svg"
+                alt="Black Coast Estates"
+                width={180}
+                height={45}
+                className="h-10 w-auto"
+              />
             </Link>
             <p className="text-sm text-bce-muted leading-relaxed max-w-xs">
               Luxury vacation homes in Playa Negra, Guanacaste, Costa Rica. Co-ownership

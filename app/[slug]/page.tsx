@@ -12,6 +12,7 @@ import TableOfContents from '@/components/TableOfContents'
 import StickyLeadBar from '@/components/StickyLeadBar'
 import RelatedPosts from '@/components/RelatedPosts'
 import NewsletterCTA from '@/components/NewsletterCTA'
+import ReadingProgress from '@/components/ReadingProgress'
 
 interface PageProps {
   params: { slug: string }
@@ -69,6 +70,7 @@ export default function BlogPostPage({ params }: PageProps) {
 
   return (
     <>
+      <ReadingProgress />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas) }}
