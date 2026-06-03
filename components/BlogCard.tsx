@@ -14,8 +14,8 @@ export default function BlogCard({ post, featured = false }: BlogCardProps) {
   if (featured) {
     return (
       <Link
-        href={`/${post.slug}`}
-        className="group relative block overflow-hidden min-h-[480px] lg:min-h-[560px]"
+        href={`/blog/${post.slug}`}
+        className="dark group relative block overflow-hidden min-h-[480px] lg:min-h-[560px]"
       >
         <Image
           src={post.coverImage}
@@ -59,7 +59,7 @@ export default function BlogCard({ post, featured = false }: BlogCardProps) {
 
   return (
     <Link
-      href={`/${post.slug}`}
+      href={`/blog/${post.slug}`}
       className="group flex flex-col overflow-hidden"
     >
       {/* Image */}
@@ -86,6 +86,12 @@ export default function BlogCard({ post, featured = false }: BlogCardProps) {
           <time dateTime={post.date}>{formattedDate}</time>
           <span aria-hidden="true">·</span>
           <span>{post.readingTime}</span>
+          {post.authorSlug && (
+            <>
+              <span aria-hidden="true">·</span>
+              <span>{post.author}</span>
+            </>
+          )}
         </div>
       </div>
     </Link>

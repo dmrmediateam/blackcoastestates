@@ -39,7 +39,7 @@ export default function HomePage({ searchParams }: PageProps) {
 
       {/* ── HERO ── */}
       {!activeCategory && (
-        <section className="relative min-h-[90vh] flex flex-col justify-end overflow-hidden">
+        <section className="dark relative min-h-[90vh] flex flex-col justify-end overflow-hidden">
           {/* Background video */}
           <video
             autoPlay

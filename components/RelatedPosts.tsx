@@ -14,7 +14,7 @@ export default function RelatedPosts({ posts }: { posts: PostMeta[] }) {
           {posts.map((post) => (
             <Link
               key={post.slug}
-              href={`/${post.slug}`}
+              href={`/blog/${post.slug}`}
               className="group border border-bce-border hover:border-bce-gold/40 transition-all duration-300 overflow-hidden bg-bce-black"
             >
               <div className="relative aspect-video overflow-hidden">

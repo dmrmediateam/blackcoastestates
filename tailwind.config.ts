@@ -7,17 +7,19 @@ const config: Config = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './content/**/*.{md,mdx}',
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        'bce-black': '#212121',
-        'bce-surface': '#2a2a2a',
-        'bce-border': '#333333',
-        'bce-gold': '#c5a96a',
-        'bce-gold-light': '#d4bb85',
-        'bce-cream': '#fefdfb',
-        'bce-muted': '#8a8a8a',
-        'bce-sage': '#95a89d',
+        // CSS-variable-backed colours — values swap between light & dark themes
+        'bce-black':      'rgb(var(--bce-black)      / <alpha-value>)',
+        'bce-surface':    'rgb(var(--bce-surface)    / <alpha-value>)',
+        'bce-border':     'rgb(var(--bce-border)     / <alpha-value>)',
+        'bce-gold':       'rgb(var(--bce-gold)       / <alpha-value>)',
+        'bce-gold-light': 'rgb(var(--bce-gold-light) / <alpha-value>)',
+        'bce-cream':      'rgb(var(--bce-cream)      / <alpha-value>)',
+        'bce-muted':      'rgb(var(--bce-muted)      / <alpha-value>)',
+        'bce-sage':       'rgb(var(--bce-sage)       / <alpha-value>)',
       },
       fontFamily: {
         serif: ['var(--font-playfair)', 'Georgia', 'serif'],
@@ -26,18 +28,8 @@ const config: Config = {
       typography: {
         DEFAULT: {
           css: {
-            '--tw-prose-body': '#c8c4b8',
-            '--tw-prose-headings': '#fefdfb',
-            '--tw-prose-links': '#c5a96a',
-            '--tw-prose-bold': '#fefdfb',
-            '--tw-prose-counters': '#c5a96a',
-            '--tw-prose-bullets': '#c5a96a',
-            '--tw-prose-hr': '#333333',
-            '--tw-prose-quotes': '#c8c4b8',
-            '--tw-prose-quote-borders': '#c5a96a',
-            '--tw-prose-code': '#c5a96a',
+            '--tw-prose-pre-bg': '#1a1a1a',
             '--tw-prose-pre-code': '#fefdfb',
-            '--tw-prose-pre-bg': '#2a2a2a',
           },
         },
       },

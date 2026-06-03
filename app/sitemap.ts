@@ -6,7 +6,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const categories = getAllCategories()
 
   const postEntries: MetadataRoute.Sitemap = posts.map((post) => ({
-    url: `https://blog.blackcoastestates.com/${post.slug}`,
+    url: `https://blog.blackcoastestates.com/blog/${post.slug}`,
     lastModified: new Date(post.date),
     changeFrequency: 'monthly',
     priority: 0.8,

@@ -1,33 +1,93 @@
 import { Post } from './posts'
+import { Author, getAuthor } from './authors'
 import { extractFaqs } from './toc'
 
-export function generateArticleSchema(post: Post) {
+export function generatePersonSchema(author: Author) {
   return {
     '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: post.title,
-    description: post.excerpt,
-    image: post.coverImage,
-    datePublished: post.date,
-    dateModified: post.date,
-    author: {
+    '@type': 'Person',
+    name: author.name,
+    jobTitle: author.title,
+    description: author.bio,
+    image: `https://blog.blackcoastestates.com${author.image}`,
+    url: `https://blog.blackcoastestates.com/author/${author.slug}`,
+    worksFor: {
       '@type': 'Organization',
       name: 'Black Coast Estates',
       url: 'https://blackcoastestates.com',
     },
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Playa Negra',
+      addressRegion: 'Guanacaste',
+      addressCountry: 'CR',
+    },
+    knowsAbout: author.expertise,
+    ...(author.email ? { email: author.email } : {}),
+    ...(author.phone ? { telephone: author.phone } : {}),
+    ...(author.social && Object.values(author.social).filter(Boolean).length > 0
+      ? { sameAs: Object.values(author.social).filter(Boolean) }
+      : {}),
+  }
+}
+
+export function generateArticleSchema(post: Post) {
+  const author = post.authorSlug ? getAuthor(post.authorSlug) : undefined
+
+  const authorSchema = author
+    ? {
+        '@type': 'Person',
+        name: author.name,
+        jobTitle: author.title,
+        url: `https://blog.blackcoastestates.com/author/${author.slug}`,
+      }
+    : {
+        '@type': 'Organization',
+        name: 'Black Coast Estates',
+        url: 'https://blackcoastestates.com',
+      }
+
+  const wordCount = post.content.trim().split(/\s+/).length
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.excerpt,
+    image: post.coverImage,
+    datePublished: post.date,
+    dateModified: post.lastModified || post.date,
+    inLanguage: 'en-US',
+    articleSection: post.category,
+    wordCount,
+    author: authorSchema,
     publisher: {
       '@type': 'Organization',
       name: 'Black Coast Estates',
+      url: 'https://blackcoastestates.com',
       logo: {
         '@type': 'ImageObject',
         url: 'https://blackcoastestates.com/favicon.ico',
       },
+      sameAs: [
+        'https://www.instagram.com/blackcoastestates',
+        'https://blackcoastestates.com',
+      ],
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://blog.blackcoastestates.com/${post.slug}`,
+      '@id': `https://blog.blackcoastestates.com/blog/${post.slug}`,
+    },
+    isPartOf: {
+      '@type': 'Blog',
+      name: 'Black Coast Estates Journal',
+      url: 'https://blog.blackcoastestates.com',
     },
     keywords: post.tags.join(', '),
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      xpath: ['/html/head/title', '//h1'],
+    },
   }
 }
 
@@ -52,7 +112,7 @@ export function generateBreadcrumbSchema(post: Post) {
         '@type': 'ListItem',
         position: 3,
         name: post.title,
-        item: `https://blog.blackcoastestates.com/${post.slug}`,
+        item: `https://blog.blackcoastestates.com/blog/${post.slug}`,
       },
     ],
   }

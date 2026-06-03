@@ -7,7 +7,7 @@ const trustPoints = [
 
 export default function NewsletterCTA() {
   return (
-    <section className="border-t border-bce-border py-24 bg-bce-surface">
+    <section className="dark border-t border-bce-border py-24 bg-bce-surface">
       <div className="max-w-5xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 

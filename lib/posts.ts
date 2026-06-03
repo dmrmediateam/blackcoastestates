@@ -9,9 +9,11 @@ export interface PostMeta {
   title: string
   excerpt: string
   date: string
+  lastModified?: string
   category: string
   tags: string[]
   author: string
+  authorSlug?: string
   coverImage: string
   readingTime: string
 }
@@ -46,6 +48,8 @@ export function getAllPosts(): PostMeta[] {
         category: data.category as string,
         tags: (data.tags as string[]) || [],
         author: (data.author as string) || 'Black Coast Estates',
+        authorSlug: (data.authorSlug as string) || undefined,
+        lastModified: (data.lastModified as string) || undefined,
         coverImage: (data.coverImage as string) || '/images/default-cover.jpg',
         readingTime: calculateReadingTime(content),
       } satisfies PostMeta
@@ -66,6 +70,8 @@ export function getPostBySlug(slug: string): Post {
     category: data.category as string,
     tags: (data.tags as string[]) || [],
     author: (data.author as string) || 'Black Coast Estates',
+    authorSlug: (data.authorSlug as string) || undefined,
+    lastModified: (data.lastModified as string) || undefined,
     coverImage: (data.coverImage as string) || '/images/default-cover.jpg',
     readingTime: calculateReadingTime(content),
     content,

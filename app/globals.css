@@ -2,6 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Theme CSS variables ──────────────────────────────────────
+   bce-black / bce-cream swap roles between light & dark:
+   • light: bce-black = warm page bg,  bce-cream = dark body text
+   • dark:  bce-black = dark page bg,  bce-cream = light body text
+   Elements that must ALWAYS appear dark (header, footer, hero,
+   image-overlay cards) carry a forced `dark` class so they always
+   resolve the dark variable set regardless of the site theme.
+─────────────────────────────────────────────────────────────── */
+@layer base {
+  :root {
+    /* Light mode — warm coastal cream */
+    --bce-black:      250 249 246;   /* #faf9f6  page background    */
+    --bce-surface:    240 234 224;   /* #f0eae0  card / surface bg   */
+    --bce-border:     216 206 190;   /* #d8cebc  borders             */
+    --bce-gold:       197 169 106;   /* #c5a96a  gold accent         */
+    --bce-gold-light: 212 187 133;   /* #d4bb85  lighter gold        */
+    --bce-cream:       28  26  24;   /* #1c1a18  primary text        */
+    --bce-muted:      100  90  80;   /* #645a50  muted text          */
+    --bce-sage:        60  82  68;   /* #3c5244  sage                */
+  }
+
+  .dark {
+    /* Dark mode — original brand palette */
+    --bce-black:       33  33  33;   /* #212121  page background    */
+    --bce-surface:     42  42  42;   /* #2a2a2a  card / surface bg  */
+    --bce-border:      51  51  51;   /* #333333  borders            */
+    --bce-gold:       197 169 106;   /* #c5a96a  gold accent        */
+    --bce-gold-light: 212 187 133;   /* #d4bb85  lighter gold       */
+    --bce-cream:      254 253 251;   /* #fefdfb  primary text       */
+    --bce-muted:      138 138 138;   /* #8a8a8a  muted text         */
+    --bce-sage:       149 168 157;   /* #95a89d  sage               */
+  }
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -31,6 +65,7 @@
       prose-ul:text-bce-cream/80 prose-ol:text-bce-cream/80
       prose-li:marker:text-bce-gold
       prose-hr:border-bce-border prose-hr:my-12
-      prose-code:text-bce-gold prose-code:bg-bce-surface prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded;
+      prose-code:text-bce-gold prose-code:bg-bce-surface prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
+      prose-pre:bg-[#1a1a1a] prose-pre:text-[#fefdfb];
   }
 }

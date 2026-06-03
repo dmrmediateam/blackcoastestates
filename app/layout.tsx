@@ -5,6 +5,7 @@ import './globals.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import WhatsAppButton from '@/components/WhatsAppButton'
+import ThemeProvider from '@/components/ThemeProvider'
 import { generateLocalBusinessSchema } from '@/lib/schema'
 
 const raleway = Raleway({
@@ -72,16 +73,18 @@ export default function RootLayout({
   const localBusinessSchema = generateLocalBusinessSchema()
 
   return (
-    <html lang="en" className={`${raleway.variable} ${playfair.variable}`}>
+    <html lang="en" className={`${raleway.variable} ${playfair.variable}`} suppressHydrationWarning>
       <body className="bg-bce-black text-bce-cream font-sans antialiased min-h-screen">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
-        />
-        <Header />
-        <main>{children}</main>
-        <Footer />
-        <WhatsAppButton />
+        <ThemeProvider>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+          />
+          <Header />
+          <main>{children}</main>
+          <Footer />
+          <WhatsAppButton />
+        </ThemeProvider>
       </body>
     </html>
   )
